@@ -1,1 +1,0 @@
-import{f as e,m as t}from"../chunks/Ce41ZjGq.js";import"../chunks/xihTtKlq.js";var n=t(`<h1>Page du CV</h1>`);function r(t){e(t,n())}export{r as component};
