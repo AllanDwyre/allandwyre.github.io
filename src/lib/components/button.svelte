@@ -1,8 +1,8 @@
 <script lang="ts">
-	let { content, click_action } = $props();
+	let { content, onclick } = $props();
 </script>
 
-<button onclick={click_action}>{content}</button>
+<button {onclick}>{content}</button>
 
 <style lang="scss">
 	button {

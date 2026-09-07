@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
+	import { downloadCV } from '$lib/utils/download.js';
 </script>
 
 <nav>
@@ -32,7 +33,7 @@
 	</a>
 
 	<div class="container">
-		<Button content="Download Resume" click_action={() => {}} />
+		<Button content="Download Resume" onclick={() => downloadCV()} />
 	</div>
 </nav>
 

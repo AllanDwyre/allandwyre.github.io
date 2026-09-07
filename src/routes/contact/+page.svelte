@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
 	import { Mail, Phone } from '@lucide/svelte';
+	import Button from '$lib/components/button.svelte';
 	import LinkedinIcon from '$lib/icons/linkedin.svg?component';
 	import GithubIcon from '$lib/icons/github.svg?component';
 
@@ -33,6 +34,8 @@
 			text: '07.67.02.43.46'
 		}
 	];
+
+	import { downloadCV } from '$lib/utils/download.js';
 </script>
 
 <svelte:head>
@@ -76,6 +79,8 @@
 		{/each}
 	</div>
 </div>
+
+<Button content="Download CV" onclick={() => downloadCV()} />
 
 <style lang="scss">
 	@use '../../styles/_variables.scss' as *;
