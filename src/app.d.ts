@@ -10,4 +10,13 @@ declare global {
 	}
 }
 
-export {};
+export {
+
+};
+
+
+declare module '*.svg?component' {
+	import type { Component } from 'svelte';
+	const content: Component<{ size?: number | string;[key: string]: any }>;
+	export default content;
+}

@@ -1,0 +1,149 @@
+<script lang="ts">
+	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
+	import { Mail, Phone } from '@lucide/svelte';
+	import LinkedinIcon from '$lib/icons/linkedin.svg?component';
+	import GithubIcon from '$lib/icons/github.svg?component';
+
+	const contactLinks = [
+		{
+			icon: LinkedinIcon,
+			href: 'https://www.linkedin.com/in/allan-dwyre/',
+			text: 'linkedin.com/in/allan-dwyre/'
+		},
+		{
+			icon: GithubIcon,
+			href: 'https://github.com/AllanDwyre',
+			text: 'github.com/AllanDwyre'
+		},
+		{
+			icon: Mail,
+			href: 'mailto:allan.dwyre@gmail.com',
+			text: 'allan.dwyre@gmail.com',
+			label: 'personal'
+		},
+		// {
+		// 	icon: Mail,
+		// 	href: 'mailto:allan.golding-dwyre@mistral.fr',
+		// 	text: 'allan.golding-dwyre@mistral.fr',
+		// 	label: 'professional'
+		// },
+		{
+			icon: Phone,
+			href: 'tel:+33767024346',
+			text: '07.67.02.43.46'
+		}
+	];
+</script>
+
+<svelte:head>
+	<title>Contact - Allan Golding Dwyre</title>
+</svelte:head>
+
+<header>
+	<Breadcrumbs
+		links={[
+			{ href: '/', text: 'Portfolio' },
+			{ href: '/contact', text: 'Contact' }
+		]}
+	/>
+	<div class="header-data">
+		<img src="/profil.png" alt="Allan Golding Dwyre profile" class="header-image" />
+		<div class="header-text">
+			<h1>Allan Golding Dwyre</h1>
+			<p>
+				I'm currently based in <span>Paris, France</span>. <br />
+				Feel free to reach out to me via email or through my professional profiles
+			</p>
+		</div>
+	</div>
+</header>
+
+<div class="contact-container">
+	<h2>📬 Contact</h2>
+
+	<div class="contact-links">
+		{#each contactLinks as link}
+			<p class="contact-row">
+				<link.icon />
+
+				<span class="link-text">
+					<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}</a>
+					{#if link.label}
+						<span class="link-label">({link.label})</span>
+					{/if}
+				</span>
+			</p>
+		{/each}
+	</div>
+</div>
+
+<style lang="scss">
+	@use '../../styles/_variables.scss' as *;
+
+	header {
+		margin: 5rem 0 0 10rem;
+	}
+
+	.header-data {
+		display: flex;
+		gap: 2.5rem;
+		color: $primary;
+	}
+
+	.header-text {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		height: 10rem;
+
+		p {
+			line-height: 1.5;
+			span {
+				font-family: $font-heading;
+			}
+		}
+	}
+
+	.header-image {
+		aspect-ratio: 1 / 1;
+		height: 10rem;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+
+	.contact-container {
+		color: $primary;
+
+		margin: 3rem 0 0 22.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: $spacing-md;
+
+		.contact-links {
+			display: flex;
+			flex-direction: column;
+			gap: $spacing-md;
+
+			.contact-row {
+				display: flex;
+				align-items: center;
+				gap: $spacing-sm;
+				a {
+					color: $primary;
+					text-decoration: underline;
+					padding: $spacing-xs;
+					letter-spacing: 0.04em;
+
+					transition: background-color 0.3s ease;
+					&:hover {
+						background-color: rgba($color-light-blue, 0.2);
+					}
+				}
+				.link-label {
+					color: gray;
+					font-size: 0.9em;
+				}
+			}
+		}
+	}
+</style>

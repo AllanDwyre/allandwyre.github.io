@@ -3,6 +3,9 @@ import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import svg from '@poppanator/sveltekit-svg';
+
 
 export default defineConfig({
 	plugins: [
@@ -15,8 +18,18 @@ export default defineConfig({
 			adapter: adapter({
 				fallback: 'index.html'
 			}),
-			preprocess: [mdsvex({ extensions: ['.svx', '.md'] })],
+			preprocess: [vitePreprocess(), mdsvex({ extensions: ['.svx', '.md'] })],
 			extensions: ['.svelte', '.svx', '.md']
+		}),
+		svg({
+			includePaths: ['./src/lib/icons/'],
+			svgoOptions: {
+				multipass: true,
+				plugins: [
+					{ name: 'preset-default' },
+					{ name: 'removeAttrs', params: { attrs: '(fill|stroke)' } }
+				]
+			}
 		})
 	],
 	test: {

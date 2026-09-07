@@ -2,9 +2,6 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
-// Reset de base
-@import 'base';
-
 // Styles globaux
 :root {
   --primary: $primary;
@@ -14,6 +11,12 @@
 * {
   margin: 0;
   padding: 0;
+
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -25,25 +28,13 @@ body {
   background-color: $background;
 }
 
-// Classes utilitaires
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 $spacing-md;
+
+h1 {
+  font-family: $font-heading;
+  font-size: $font-size-xxl;
 }
 
-.btn {
-  display: inline-block;
-  padding: $spacing-xs $spacing-sm;
-  background: $primary;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s;
-
-  &:hover {
-    background: darken($primary, 15%);
-  }
+h2 {
+  font-family: $font-heading;
+  font-size: $font-size-xl;
 }
