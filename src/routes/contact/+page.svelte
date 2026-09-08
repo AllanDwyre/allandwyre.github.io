@@ -7,7 +7,6 @@
 	import { downloadCV } from '$lib/utils/download.js';
 	import RainbowBand from '$lib/components/rainbow-band.svelte';
 
-	
 	const contactLinks = [
 		{
 			icon: LinkedinIcon,
@@ -37,7 +36,6 @@
 			text: '07.67.02.43.46'
 		}
 	];
-
 </script>
 
 <svelte:head>
@@ -92,15 +90,20 @@
 
 <style lang="scss">
 	@use '../../styles/_variables.scss' as *;
+	@use '../../styles/_mixins.scss' as *;
 
 	header {
-		margin: 5rem 0 0 10rem;
+		margin: 5rem 0 0 clamp(1rem, 10vw, 10rem);
 	}
 
 	.header-data {
 		display: flex;
 		gap: 2.5rem;
 		color: $primary;
+		@include for-size(phone) {
+			flex-direction: column;
+			gap: 1rem;
+		}
 	}
 
 	.header-text {
@@ -108,6 +111,12 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		height: 10rem;
+
+		@include for-size(phone) {
+			h1 {
+				font-size: 2rem;
+			}
+		}
 
 		p {
 			line-height: 1.5;
@@ -119,9 +128,11 @@
 
 	.header-image {
 		aspect-ratio: 1 / 1;
-		height: 10rem;
+		height: clamp(6rem, 20vw, 10rem);
+		width: clamp(6rem, 20vw, 10rem);
 		object-fit: cover;
 		border-radius: 50%;
+		flex-shrink: 0; // évite qu'un flex parent l'écrase
 
 		view-transition-name: profil-photo;
 	}
@@ -129,7 +140,7 @@
 	.contact-container {
 		color: $primary;
 
-		margin: 3rem 0 0 22.5rem;
+		margin: 3rem 0 0 clamp(2rem, 15vw, 22.5rem);
 		display: flex;
 		flex-direction: column;
 		gap: $spacing-md;
@@ -169,12 +180,10 @@
 		justify-content: center;
 		align-items: center;
 		gap: 2rem;
-
-		position: absolute;
-		bottom: 0;
-
+		margin-top: auto;
+		padding-top: 2rem;
 		small {
-			margin-top: 3.6rem;
+			margin-top: clamp(1.5rem, 6vw, 3.6rem);
 		}
 	}
 </style>

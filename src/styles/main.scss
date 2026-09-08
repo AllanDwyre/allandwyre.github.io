@@ -36,15 +36,38 @@ body {
   line-height: 1.6;
   color: $text;
   background-color: $background;
+
+  // permet à `margin-top: auto` sur un footer enfant direct de coller
+  // en bas de page même quand le contenu ne remplit pas le viewport
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
 }
 
 
 h1 {
   font-family: $font-heading;
-  font-size: $font-size-xxl;
+  // valeur pc inchangée ($font-size-xxl = 4rem), fluide en dessous
+  font-size: clamp(2rem, 6vw + 1rem, $font-size-xxl);
 }
 
 h2 {
   font-family: $font-heading;
-  font-size: $font-size-xl;
+  // valeur pc inchangée ($font-size-xl = 2rem), fluide en dessous
+  font-size: clamp(1.5rem, 3vw + 1rem, $font-size-xl);
+}
+
+
+.only-phone {
+  display: none;
+}
+
+@include for-size(phone) {
+  .no-phone {
+    display: none !important;
+  }
+
+  .only-phone {
+    display: block;
+  }
 }

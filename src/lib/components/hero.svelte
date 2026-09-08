@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import Button from '$lib/components/button.svelte';
+	import { downloadCV } from '$lib/utils/download.js';
+
 	import CompactContact from './compact-contact.svelte';
-	import { Laptop, MapPinHouse, LaptopMinimalCheck } from '@lucide/svelte';
+	import { Laptop, MapPinHouse, LaptopMinimalCheck, ArrowBigDownDash } from '@lucide/svelte';
 
 	const status = [
 		{
@@ -69,6 +72,9 @@
 		<div class="fade-in-item">
 			<CompactContact />
 		</div>
+		<div class="only-phone" style="margin: 2rem 0;">
+			<Button icon={ArrowBigDownDash} content="Download Resume" onclick={() => downloadCV()} />
+		</div>
 	</div>
 </section>
 
@@ -119,7 +125,17 @@
 		.profil {
 			display: flex;
 			flex-direction: column;
+			align-items: center;
 			gap: 1rem;
+		}
+
+		@include for-size(phone) {
+			flex-direction: column-reverse;
+
+			h1 {
+				margin-top: 2rem;
+				width: 100%;
+			}
 		}
 	}
 	// h1 et le wrapper autour de CompactContact : jamais un ancêtre de
@@ -130,9 +146,11 @@
 
 	.header-image {
 		aspect-ratio: 1 / 1;
-		height: 13.875rem;
+		height: clamp(10rem, 20vw, 13.875rem);
+		width: clamp(10rem, 20vw, 13.875rem);
 		object-fit: cover;
 		border-radius: 50%;
+		flex-shrink: 0;
 
 		view-transition-name: profil-photo;
 	}
@@ -149,14 +167,20 @@
 			font-weight: bold;
 			color: $primary;
 		}
+
+		@include for-size(phone) {
+			flex-direction: column;
+			gap: $spacing-sm;
+			font-size: $font-size-base;
+		}
 	}
 
 	.cover-letter {
-		min-height: 100vh;
+		min-height: 100dvh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 43dvw;
+		width: clamp(20rem, 43dvw, 43.75rem);
 		margin: 0 auto;
 
 		.letter {
@@ -166,6 +190,10 @@
 			letter-spacing: 0.04em;
 
 			animation: fade-in 0.6s ease-out 0.3s both;
+
+			@include for-size(phone) {
+				font-size: $font-size-base;
+			}
 		}
 
 		small {

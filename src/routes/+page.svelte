@@ -24,7 +24,12 @@
 <Footer />
 
 <style lang="scss">
+	@use '../styles/mixins' as *;
 	main {
 		margin: 9rem 9.5rem 0 9rem;
+
+		@include for-size(phone) {
+			margin: 9rem 1rem 0 1rem;
+		}
 	}
 </style>

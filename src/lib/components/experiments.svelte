@@ -17,6 +17,7 @@
 
 <style lang="scss">
 	@use '../../styles/variables' as *;
+	@use '../../styles/mixins' as *;
 
 	.experiments-header {
 		display: flex;
@@ -38,6 +39,10 @@
 				&:hover {
 					font-weight: bold;
 				}
+			}
+
+			@include for-size(phone) {
+				display: none;
 			}
 		}
 	}

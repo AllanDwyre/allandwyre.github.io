@@ -5,21 +5,21 @@
 </script>
 
 <nav>
-	<a href="/#" class="container after-gap" style="margin-right: auto;">
+	<a href="/#" class="container after-gap">
 		<div class="color-container" style="background-color: var(--color-red);"></div>
 		<div class="slider">
 			<p>Allan Golding Dwyre</p>
 		</div>
 	</a>
 
-	<a href="/#experiments" class="container">
+	<a href="/#experiments" class="container no-phone">
 		<div class="color-container" style="background-color: var(--color-orange);"></div>
 		<div class="slider">
 			<p>Expriments</p>
 		</div>
 	</a>
 
-	<a href="/#" class="container">
+	<a href="/#" class="container no-phone">
 		<div class="color-container" style="background-color: var(--color-light-blue);"></div>
 		<div class="slider">
 			<p>Articles</p>
@@ -33,13 +33,14 @@
 		</div>
 	</a>
 
-	<div class="container">
+	<div class="container no-phone">
 		<Button icon={ArrowBigDownDash} content="Download Resume" onclick={() => downloadCV()} />
 	</div>
 </nav>
 
 <style lang="scss">
 	@use '../../styles/_variables.scss' as *;
+	@use '../../styles/_mixins.scss' as *;
 
 	nav {
 		position: fixed;
@@ -57,6 +58,10 @@
 		border-bottom: 1px solid $border;
 
 		backdrop-filter: blur(10px);
+
+		@include for-size(phone) {
+			justify-content: flex-start;
+		}
 	}
 
 	.container {
@@ -97,6 +102,20 @@
 			transition:
 				transform 0.3s ease-in-out,
 				box-shadow 0.3s ease-in-out;
+		}
+		@include for-size(phone) {
+			width: 100%;
+
+			.slider {
+				padding: 0;
+			}
+		}
+	}
+
+	.after-gap {
+		margin-right: auto;
+		@include for-size(phone) {
+			margin-right: 0;
 		}
 	}
 
