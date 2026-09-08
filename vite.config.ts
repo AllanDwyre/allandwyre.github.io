@@ -27,7 +27,10 @@ export default defineConfig({
 				multipass: true,
 				plugins: [
 					{ name: 'preset-default' },
-					{ name: 'removeAttrs', params: { attrs: '(fill|stroke)' } }
+					{
+						name: 'convertColors',
+						params: { currentColor: true }
+					}
 				]
 			}
 		})

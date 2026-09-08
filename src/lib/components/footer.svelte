@@ -1,4 +1,3 @@
-
 <script>
 	import CompactContact from '$lib/components/compact-contact.svelte';
 </script>
@@ -9,8 +8,8 @@
 	<div class="band"></div>
 	<div class="band"></div>
 	<div class="info">
-		<p> @2026, Allan Golding Dwyre</p>
-		<CompactContact invert_color={true}/>
+		<p>@2026, Allan Golding Dwyre</p>
+		<CompactContact invert_color={true} />
 	</div>
 </footer>
 
@@ -22,21 +21,25 @@
 	footer {
 		background-color: $background;
 		border-top: 1px solid $border;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		left: 0;
+		position: relative;
 	}
-	
+
 	.band {
 		width: 100%;
 		height: 1.1rem;
 
-		&:nth-child(1) { background-color: $color-yellow; }
-		&:nth-child(2) { background-color: $color-light-orange; }
-		&:nth-child(3) { background-color: $color-orange; }
-		&:nth-child(4) { background-color: $color-red; }
-
+		&:nth-child(1) {
+			background-color: $color-yellow;
+		}
+		&:nth-child(2) {
+			background-color: $color-light-orange;
+		}
+		&:nth-child(3) {
+			background-color: $color-orange;
+		}
+		&:nth-child(4) {
+			background-color: $color-red;
+		}
 	}
 
 	.info {
@@ -51,5 +54,4 @@
 		padding: 0.5rem 2rem;
 		color: #fff;
 	}
-
 </style>

@@ -1,20 +1,31 @@
 <script lang="ts">
-	let { content, onclick } = $props();
+	let { content, icon: Icon = null, onclick } = $props();
 </script>
 
-<button {onclick}>{content}</button>
+<button {onclick}>
+	<Icon />
+	<span>{content}</span>
+</button>
 
 <style lang="scss">
+	@use '../../styles/_variables.scss' as *;
+
 	button {
+		display: flex;
+		align-items: center;
+		gap: $spacing-xs;
+
 		background-color: #000;
 		color: #fff;
+
 		border: none;
-		padding: 0.5rem 1rem;
-		border-radius: 0.25rem;
+		padding: $spacing-xs 0.875rem;
+		border-radius: $spacing-xs;
+
 		cursor: pointer;
-		font-size: 1rem;
+
+		font-size: $font-size-lg;
 		font-weight: bold;
 		text-decoration: none;
-		display: inline-block;
 	}
 </style>

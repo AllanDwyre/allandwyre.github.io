@@ -1,8 +1,14 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { ArrowDownToLine } from '@lucide/svelte';
 
 	// Date cible : 10 septembre 2026, minuit (heure locale)
-	const TARGET_DATE: Date = new Date('2026-09-10T00:00:00');
+	const TARGET_DATE: Date = new Date('2026-09-11T00:00:00');
+	const options: Intl.DateTimeFormatOptions = {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	};
 
 	let days = $state(0);
 	let hours = $state(0);
@@ -62,7 +68,7 @@
 		</h1>
 		<p class="subtext">
 			I'm still polishing a few experiments before making it public. Coming back on <strong
-				>September 10, 2026</strong
+				>{TARGET_DATE.toLocaleDateString(undefined, options)}</strong
 			>.
 		</p>
 
@@ -81,7 +87,7 @@
 	{/if}
 
 	<a class="cv-btn" href="/contact" aria-disabled="true">
-		<span class="icon">⬇</span>
+		<ArrowDownToLine color="#fff" />
 		Contact me in the meantime
 	</a>
 </section>
@@ -231,10 +237,6 @@
 
 	.cv-btn:hover {
 		transform: translateY(-2px);
-	}
-
-	.icon {
-		font-size: 0.9rem;
 	}
 
 	@media (max-width: 480px) {

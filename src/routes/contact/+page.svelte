@@ -1,10 +1,13 @@
 <script lang="ts">
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
-	import { Mail, Phone } from '@lucide/svelte';
+	import { Mail, Phone, ArrowBigDownDash } from '@lucide/svelte';
 	import Button from '$lib/components/button.svelte';
 	import LinkedinIcon from '$lib/icons/linkedin.svg?component';
 	import GithubIcon from '$lib/icons/github.svg?component';
+	import { downloadCV } from '$lib/utils/download.js';
+	import RainbowBand from '$lib/components/rainbow-band.svelte';
 
+	
 	const contactLinks = [
 		{
 			icon: LinkedinIcon,
@@ -35,7 +38,6 @@
 		}
 	];
 
-	import { downloadCV } from '$lib/utils/download.js';
 </script>
 
 <svelte:head>
@@ -61,7 +63,7 @@
 	</div>
 </header>
 
-<div class="contact-container">
+<section class="contact-container">
 	<h2>📬 Contact</h2>
 
 	<div class="contact-links">
@@ -78,9 +80,15 @@
 			</p>
 		{/each}
 	</div>
-</div>
+</section>
 
-<Button content="Download CV" onclick={() => downloadCV()} />
+<footer>
+	<Button icon={ArrowBigDownDash} content="Download Resume" onclick={() => downloadCV()} />
+
+	<RainbowBand />
+
+	<small>@2026 Allan Golding Dwyre</small>
+</footer>
 
 <style lang="scss">
 	@use '../../styles/_variables.scss' as *;
@@ -114,6 +122,8 @@
 		height: 10rem;
 		object-fit: cover;
 		border-radius: 50%;
+
+		view-transition-name: profil-photo;
 	}
 
 	.contact-container {
@@ -149,6 +159,22 @@
 					font-size: 0.9em;
 				}
 			}
+		}
+	}
+
+	footer {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+
+		position: absolute;
+		bottom: 0;
+
+		small {
+			margin-top: 3.6rem;
 		}
 	}
 </style>

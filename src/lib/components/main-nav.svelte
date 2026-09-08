@@ -1,24 +1,25 @@
 <script lang="ts">
 	import Button from '$lib/components/button.svelte';
+	import { ArrowBigDownDash } from '@lucide/svelte';
 	import { downloadCV } from '$lib/utils/download.js';
 </script>
 
 <nav>
-	<a href="/" class="container after-gap" style="margin-right: auto;">
+	<a href="/#" class="container after-gap" style="margin-right: auto;">
 		<div class="color-container" style="background-color: var(--color-red);"></div>
 		<div class="slider">
 			<p>Allan Golding Dwyre</p>
 		</div>
 	</a>
 
-	<a href="/" class="container">
+	<a href="/#experiments" class="container">
 		<div class="color-container" style="background-color: var(--color-orange);"></div>
 		<div class="slider">
 			<p>Expriments</p>
 		</div>
 	</a>
 
-	<a href="/" class="container">
+	<a href="/#" class="container">
 		<div class="color-container" style="background-color: var(--color-light-blue);"></div>
 		<div class="slider">
 			<p>Articles</p>
@@ -33,7 +34,7 @@
 	</a>
 
 	<div class="container">
-		<Button content="Download Resume" onclick={() => downloadCV()} />
+		<Button icon={ArrowBigDownDash} content="Download Resume" onclick={() => downloadCV()} />
 	</div>
 </nav>
 
@@ -45,13 +46,14 @@
 		top: 0;
 		left: 0;
 		right: 0;
+		z-index: 100;
 
 		display: flex;
 		height: 5rem;
 		align-items: center;
 		justify-content: flex-end;
 
-		background-color: rgba($background, 0.9);
+		background-color: rgba($background, 0.7);
 		border-bottom: 1px solid $border;
 
 		backdrop-filter: blur(10px);

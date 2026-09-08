@@ -17,12 +17,13 @@ $color-dark-blue: #0082E6;
 $color-light-blue: #0096ED;
 
 // Espacements
-$spacing-xs: 0.3125rem; // 5px
+$spacing-xxs: 0.3125rem; // 5px
+$spacing-xs: 0.625rem; // 10px
 $spacing-sm: 1rem; // 16px
 $spacing-md: 1.5rem; // 24px
 $spacing-lg: 2rem; // 32px
 $spacing-xl: 3rem; // 48px
-
+$spacing-xxl: 5rem; // 80px
 
 // Polices
 $font-main: 'Urbanist', sans-serif;

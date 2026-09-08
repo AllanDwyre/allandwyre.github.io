@@ -1,17 +1,35 @@
-
 <script lang="ts">
+	import { Mail } from '@lucide/svelte';
+	import LinkedinIcon from '$lib/icons/linkedin.svg?component';
+	import GithubIcon from '$lib/icons/github.svg?component';
+
 	let { invert_color = false } = $props();
 
-	let color = $derived(() => {
-		return invert_color ? '#fff' : '#000';
-	});
-
+	let color = $derived(invert_color ? '#fff' : '#000');
 </script>
 
-<div>
-	<p style="color: {color};"> L </p>
-	<p style="color: {color};"> G </p>
-	<p style="color: {color};"> M </p>
+<div class="social-icons">
+	<a
+		href="https://linkedin.com/in/ton-profil"
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="LinkedIn"
+	>
+		<LinkedinIcon style="color: {color};" />
+	</a>
+
+	<a
+		href="https://github.com/ton-profil"
+		target="_blank"
+		rel="noopener noreferrer"
+		aria-label="GitHub"
+	>
+		<GithubIcon style="color: {color};" />
+	</a>
+
+	<a href="mailto:toi@example.com" aria-label="Email">
+		<Mail style="color: {color};" />
+	</a>
 </div>
 
 <style lang="scss">
@@ -21,5 +39,21 @@
 		justify-content: center;
 		align-items: center;
 		gap: 0.5rem;
+	}
+
+	.social-icons {
+		display: flex;
+		gap: 1rem;
+
+		a {
+			display: inline-flex;
+			align-items: center;
+
+			transition: all 300ms ease-in-out;
+
+			&:hover {
+				transform: scale(1.2);
+			}
+		}
 	}
 </style>
