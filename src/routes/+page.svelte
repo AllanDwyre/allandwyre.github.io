@@ -27,7 +27,11 @@
 <style lang="scss">
 	@use '../styles/mixins' as *;
 	main {
-		margin: 9rem 9.5rem 0 9rem;
+		margin: 9rem clamp(4rem, 10vw, 9.5rem) 0 clamp(4rem, 10vw, 9rem);
+
+		@include for-size(tablet) {
+			margin: 9rem 4rem 0 4rem;
+		}
 
 		@include for-size(phone) {
 			margin: 9rem 2rem 0 2rem;
