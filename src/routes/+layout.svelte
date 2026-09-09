@@ -1,6 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
-	import favicon_pascal from '$lib/assets/favicon.png';
+	import favicon_pascale from '$lib/assets/favicon.png';
 	import '../styles/main.scss';
 	import { onNavigate } from '$app/navigation';
 
@@ -43,7 +43,7 @@
 		href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
 		rel="stylesheet"
 	/>
-	<link rel="icon" href={favicon_pascal} />
+	<link rel="icon" href={favicon_pascale} />
 </svelte:head>
 
 {@render children()}

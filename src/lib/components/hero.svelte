@@ -66,7 +66,9 @@
 </script>
 
 <section class="hero-header">
-	<h1 class="fade-in-item">Passionate about building <span>AI models</span> and deploying them.</h1>
+	<h1 class="no-phone fade-in-item">
+		Passionate about building <span>AI models</span> and deploying them.
+	</h1>
 	<div class="profil">
 		<img src="/profil.png" alt="Allan Golding Dwyre profile" class="header-image" />
 		<div class="fade-in-item">

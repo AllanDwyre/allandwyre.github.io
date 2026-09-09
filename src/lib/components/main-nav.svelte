@@ -50,7 +50,7 @@
 		z-index: 100;
 
 		display: flex;
-		height: 5rem;
+		height: $main-nav-height;
 		align-items: center;
 		justify-content: flex-end;
 

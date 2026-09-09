@@ -17,6 +17,7 @@
 	<Hero />
 	<Divider />
 	<Experiments />
+	<Divider />
 </main>
 
 <Countdown />
@@ -29,7 +30,7 @@
 		margin: 9rem 9.5rem 0 9rem;
 
 		@include for-size(phone) {
-			margin: 9rem 1rem 0 1rem;
+			margin: 9rem 2rem 0 2rem;
 		}
 	}
 </style>
