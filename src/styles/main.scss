@@ -55,6 +55,7 @@ h2 {
   font-family: $font-heading;
   // valeur pc inchangée ($font-size-xl = 2rem), fluide en dessous
   font-size: clamp(1.5rem, 3vw + 1rem, $font-size-xl);
+  font-weight: 600;
 }
 
 

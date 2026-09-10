@@ -9,9 +9,9 @@
 	@use '../../styles/_variables.scss' as *;
 
 	.rainbow-band {
-		border-radius: 1rem;
+		border-radius: 13px;
 		overflow: hidden;
-		width: 50dvw;
+		width: 55dvw;
 	}
 
 	.band {

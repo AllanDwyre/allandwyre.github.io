@@ -10,7 +10,7 @@
 
 <div class="social-icons">
 	<a
-		href="https://linkedin.com/in/ton-profil"
+		href="https://linkedin.com/in/allan-dwyre"
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label="LinkedIn"
@@ -19,7 +19,7 @@
 	</a>
 
 	<a
-		href="https://github.com/ton-profil"
+		href="https://github.com/AllanDwyre"
 		target="_blank"
 		rel="noopener noreferrer"
 		aria-label="GitHub"
@@ -27,7 +27,7 @@
 		<GithubIcon style="color: {color};" />
 	</a>
 
-	<a href="mailto:toi@example.com" aria-label="Email">
+	<a href="mailto:allan.dwyre@gmail.com" aria-label="Email">
 		<Mail style="color: {color};" />
 	</a>
 </div>

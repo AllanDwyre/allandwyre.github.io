@@ -42,14 +42,14 @@
 	<title>Contact - Allan Golding Dwyre</title>
 </svelte:head>
 
-<header>
+<div class="contact">
 	<Breadcrumbs
 		links={[
 			{ href: '/', text: 'Portfolio' },
 			{ href: '/contact', text: 'Contact' }
 		]}
 	/>
-	<div class="header-data">
+	<div class="grid">
 		<img src="/profil.png" alt="Allan Golding Dwyre profile" class="header-image" />
 		<div class="header-text">
 			<h1>Allan Golding Dwyre</h1>
@@ -58,27 +58,26 @@
 				Feel free to reach out to me via email or through my professional profiles
 			</p>
 		</div>
+		<section class="contact-container">
+			<h2>📬 Contact</h2>
+
+			<div class="contact-links">
+				{#each contactLinks as link}
+					<p class="contact-row">
+						<link.icon />
+
+						<span class="link-text">
+							<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}</a>
+							{#if link.label}
+								<span class="link-label">({link.label})</span>
+							{/if}
+						</span>
+					</p>
+				{/each}
+			</div>
+		</section>
 	</div>
-</header>
-
-<section class="contact-container">
-	<h2>📬 Contact</h2>
-
-	<div class="contact-links">
-		{#each contactLinks as link}
-			<p class="contact-row">
-				<link.icon />
-
-				<span class="link-text">
-					<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}</a>
-					{#if link.label}
-						<span class="link-label">({link.label})</span>
-					{/if}
-				</span>
-			</p>
-		{/each}
-	</div>
-</section>
+</div>
 
 <footer>
 	<Button icon={ArrowBigDownDash} content="Download Resume" onclick={() => downloadCV()} />
@@ -92,18 +91,17 @@
 	@use '../../styles/_variables.scss' as *;
 	@use '../../styles/_mixins.scss' as *;
 
-	header {
+	.contact {
 		margin: 5rem 0 0 clamp(1rem, 10vw, 10rem);
+		color: $primary;
 	}
 
-	.header-data {
-		display: flex;
-		gap: 2.5rem;
-		color: $primary;
-		@include for-size(phone) {
-			flex-direction: column;
-			gap: 1rem;
-		}
+	.grid {
+		display: grid;
+
+		grid-template-columns: 1fr 9fr;
+
+		gap: 5rem 2.5rem; // row gap, col gap
 	}
 
 	.header-text {
@@ -132,7 +130,6 @@
 		width: clamp(6rem, 20vw, 10rem);
 		object-fit: cover;
 		border-radius: 50%;
-		flex-shrink: 0; // évite qu'un flex parent l'écrase
 
 		view-transition-name: profil-photo;
 	}
@@ -140,20 +137,23 @@
 	.contact-container {
 		color: $primary;
 
-		margin: 3rem 0 0 clamp(2rem, 15vw, 22.5rem);
 		display: flex;
 		flex-direction: column;
 		gap: $spacing-md;
 
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
+
 		.contact-links {
 			display: flex;
 			flex-direction: column;
-			gap: $spacing-md;
+			gap: 1.3rem;
+			margin-left: 0.5rem;
 
 			.contact-row {
 				display: flex;
 				align-items: center;
-				gap: $spacing-sm;
+				gap: $spacing-xs;
 				a {
 					color: $primary;
 					text-decoration: underline;
