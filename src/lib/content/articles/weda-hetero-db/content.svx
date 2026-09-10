@@ -1,0 +1,46 @@
+
+> This article takes place during my intership in 2022 in WEDA.
+
+
+# Introduction
+
+## Context 
+
+WEDA is a medical software entreprise where they help doctors to organize their consultation ....
+
+
+## The problem
+
+
+Data import
+
+
+# My Solution
+
+## the mapping of the dbs
+Without asking i took the initiative to .... 
+
+
+Hetero db to import data from one base to the other. Ask to do this manually but done it with the help of NLP. Coef multiplication between 3 data : 
+- attribut name
+- attribut syn
+- attribut type
+
+The cooef is a trust / confiance coef
+
+In only five minutes I made a mapping of the 60 cols of the external db to the weda db. 
+
+This mapping helpped was process with sql code template that I made to generate a full sql code as a mapping of one db to the other.
+
+
+## What stay manual 
+
+Only during the mapping process where some nlp coef are below a threshold. but with an interactive CLI, the tools proposed differents solutions to a attribut sort by the confidance score, the team can only pick the right one without taking hours to search. Also if even the team is not sure, they can skip at the moment to fix other low confidance score attribut. Once all finished the CLI ask for the unresolved one skipped. 
+
+# Conclusion
+
+It helped a lot the overcharge of the data recovery team and they can now focus on more important matter than importing a newly doctor data to the weda database.
+
+This new tool also facilitated the transition from any company to weda and the doctor have almost an instantanious data import and could practice the same day. 
+
+It's also futur proof because any db change in both part can be detected and triggering a new map of the data.  

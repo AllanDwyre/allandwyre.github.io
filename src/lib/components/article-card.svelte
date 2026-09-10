@@ -13,7 +13,7 @@
 
 	.card {
 		width: 100%;
-		padding: $spacing-xs;
+		padding: $spacing-sm;
 		background-color: rgba(white, 0.6);
 
 		border-radius: 0.5rem;
