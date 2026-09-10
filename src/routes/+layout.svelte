@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import favicon1 from '$lib/assets/favicon1.svg';
 	import favicon_pascale from '$lib/assets/favicon.png';
 	import '../styles/main.scss';
 	import { onNavigate } from '$app/navigation';
@@ -29,7 +30,7 @@
 		href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
 		rel="stylesheet"
 	/>
-	<link rel="icon" href={favicon_pascale} />
+	<link rel="icon" href={favicon1} />
 </svelte:head>
 
 {@render children()}
@@ -72,10 +73,10 @@
 	}
 
 	@media (prefers-reduced-motion) {
-	::view-transition-group(*),
-	::view-transition-old(*),
-	::view-transition-new(*) {
-		animation: none !important;
+		::view-transition-group(*),
+		::view-transition-old(*),
+		::view-transition-new(*) {
+			animation: none !important;
+		}
 	}
-}
 </style>

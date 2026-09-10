@@ -3,7 +3,7 @@
 	import { ArrowDownToLine } from '@lucide/svelte';
 
 	// Date cible : 10 septembre 2026, minuit (heure locale)
-	const TARGET_DATE: Date = new Date('2026-09-11T00:00:00');
+	const TARGET_DATE: Date = new Date('2026-09-12T00:00:00');
 	const options: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
 		month: 'long',

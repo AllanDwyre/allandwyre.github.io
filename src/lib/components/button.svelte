@@ -29,6 +29,12 @@
 		font-size: $font-size-lg;
 		font-weight: bold;
 		text-decoration: none;
+
+		transition: all 200ms linear;
+
+		&:hover {
+			transform: scale(1.02);
+		}
 	}
 
 	.secondary {
