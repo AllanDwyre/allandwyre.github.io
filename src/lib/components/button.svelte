@@ -1,9 +1,11 @@
 <script lang="ts">
-	let { content, icon: Icon = null, onclick } = $props();
+	let { content, icon: Icon = null, onclick, secondary = false } = $props();
 </script>
 
-<button {onclick}>
-	<Icon />
+<button {onclick} class:secondary>
+	{#if Icon}
+		<Icon />
+	{/if}
 	<span>{content}</span>
 </button>
 
@@ -15,7 +17,7 @@
 		align-items: center;
 		gap: $spacing-xs;
 
-		background-color: #000;
+		background-color: $primary;
 		color: #fff;
 
 		border: none;
@@ -27,5 +29,12 @@
 		font-size: $font-size-lg;
 		font-weight: bold;
 		text-decoration: none;
+	}
+
+	.secondary {
+		background-color: transparent;
+		color: $primary;
+
+		border: 2px solid $primary;
 	}
 </style>

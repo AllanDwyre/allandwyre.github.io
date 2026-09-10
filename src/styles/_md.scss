@@ -1,0 +1,89 @@
+// Style du rendu Markdown (.md-content), a @use depuis le <style lang="scss">
+// d'une page qui affiche du contenu Markdown (ex: experiments/[slug]).
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.md-content {
+	margin: $spacing-lg auto;
+	color: $text;
+	font-family: $font-main;
+	line-height: 1.7;
+
+	:global(h1),
+	:global(h2),
+	:global(h3) {
+		font-family: $font-heading;
+		color: $primary;
+	}
+
+	:global(h1) {
+		font-size: $font-size-sm;
+		font-family: $font-main;
+		font-weight: 400;
+		color: $color-red;
+
+		letter-spacing: 0.09em;
+		margin: 0;
+	}
+
+	:global(h2) {
+		font-size: 1.5rem;
+		margin: 0;
+	}
+
+	// Meme trait que src/lib/components/divider.svelte (.divider), sans le
+	// conteneur flex-centre : un <hr> est deja un bloc pleine largeur.
+	:global(hr) {
+		border: none;
+		height: 1px;
+		background-color: $border;
+		margin: $spacing-lg 0;
+	}
+
+	:global(p) {
+		margin: $spacing-sm 0;
+	}
+
+	:global(a) {
+		color: $primary;
+		text-decoration: underline;
+	}
+
+	:global(ul),
+	:global(ol) {
+		padding-left: $spacing-md;
+		margin: $spacing-sm 0;
+	}
+
+	:global(blockquote) {
+		border-left: 3px solid $border;
+		margin: $spacing-md 0;
+		padding-left: $spacing-sm;
+		color: $secondary;
+		font-style: italic;
+	}
+
+	:global(code) {
+		font-family: monospace;
+		background: $background;
+		padding: 0.1em 0.35em;
+		border-radius: 0.25em;
+	}
+
+	:global(pre) {
+		background: $background;
+		border: 1px solid $border;
+		border-radius: 0.5em;
+		padding: $spacing-sm;
+		overflow-x: auto;
+
+		:global(code) {
+			background: none;
+			padding: 0;
+		}
+	}
+
+	@include for-size(phone) {
+		margin: $spacing-md 1rem;
+	}
+}

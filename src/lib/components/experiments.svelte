@@ -1,34 +1,20 @@
 <script lang="ts">
 	import { getAllExperimentMetas } from '$lib/content/experiments';
+	import { getAllCategories, getCategoryColors } from '$lib/content/experiment-format';
 	import { render } from '$lib/utils/create_layout';
 	import { createDeviceMode } from '$lib/utils/viewport.svelte';
 	import ExperimentCard from './experiment-card.svelte';
 
 	const device = createDeviceMode();
 
-	const colors = [
-		'var(--color-red)',
-		'var(--color-orange)',
-		'var(--color-light-orange)',
-		'var(--color-yellow)',
-		'var(--color-dark-blue)',
-		'var(--color-light-blue)',
-		'var(--color-blue)'
-	];
-
 	const metas = getAllExperimentMetas();
 
-	const categories = Array.from(
-		new Set(metas.flatMap((m) => m.categories).sort((a, b) => a.localeCompare(b)))
-	);
+	const categories = getAllCategories();
 	let filters = ['All'].concat(categories);
-
-	// Mapping cat -> couleur, piochée dans `colors` (cycle si plus de catégories que de couleurs)
-	const category_colors = new Map(categories.map((cat, i) => [cat, colors[i % colors.length]]));
 
 	const metas_with_colors = metas.map((m) => ({
 		...m,
-		colors: m.categories.map((cat) => category_colors.get(cat)!)
+		colors: getCategoryColors(m.categories)
 	}));
 
 	let active_filter = $state('All');

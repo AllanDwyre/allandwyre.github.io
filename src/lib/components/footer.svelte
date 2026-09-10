@@ -42,7 +42,7 @@
 		position: relative;
 		overflow: hidden;
 
-		margin-top: auto;
+		margin-top: 15rem;
 	}
 
 	.band {

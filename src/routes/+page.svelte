@@ -5,6 +5,8 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Experiments from '$lib/components/experiments.svelte';
 	import Divider from '$lib/components/divider.svelte';
+	import { Contact } from '@lucide/svelte';
+	import Articles from '$lib/components/articles.svelte';
 </script>
 
 <svelte:head>
@@ -18,6 +20,7 @@
 	<Divider />
 	<Experiments />
 	<Divider />
+	<Articles/>
 </main>
 
 <Countdown />

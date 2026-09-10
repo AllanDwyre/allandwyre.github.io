@@ -51,7 +51,10 @@
 		transition: transform 300ms ease-in;
 
 		.title {
-			font-size: clamp(0.9rem, 7cqi, 1.35rem);
+			// Slope reduite (7cqi -> 2.5cqi) et range resserree : le texte ne
+			// doit plus varier fort selon la taille propre de la card, juste
+			// s'ajuster un peu sur les tres petites/tres grandes tiles.
+			font-size: clamp(1rem, 2.5cqi, 1.25rem);
 			font-weight: 600; // semi-bold
 
 			line-height: 1.25;
@@ -59,7 +62,7 @@
 		}
 
 		.categories {
-			font-size: clamp(0.65rem, 3.5cqi, $font-size-base);
+			font-size: clamp(0.75rem, 1.5cqi, $font-size-base);
 			opacity: 0.8;
 		}
 

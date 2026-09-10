@@ -19,7 +19,7 @@
 		</div>
 	</a>
 
-	<a href="/#" class="container no-phone">
+	<a href="/#article" class="container no-phone">
 		<div class="color-container" style="background-color: var(--color-light-blue);"></div>
 		<div class="slider">
 			<p>Articles</p>
