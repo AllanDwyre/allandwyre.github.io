@@ -109,13 +109,17 @@
 	.hero-header {
 		display: flex;
 		justify-content: space-between;
+		gap: 1.5rem;
 
 		margin-bottom: 5rem;
 
 		h1 {
 			color: $color-red;
 			line-height: 1.2;
-			width: 35dvw;
+
+			flex: 1 1 0;
+			min-width: 0;
+			max-width: 35dvw;
 
 			span {
 				font-family: $font-main;
@@ -129,6 +133,7 @@
 			flex-direction: column;
 			align-items: center;
 			gap: 1rem;
+			flex-shrink: 0;
 		}
 
 		@include for-size(phone) {
@@ -136,7 +141,7 @@
 
 			h1 {
 				margin-top: 2rem;
-				width: 100%;
+				max-width: 100%;
 			}
 		}
 	}

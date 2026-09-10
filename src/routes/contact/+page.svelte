@@ -94,6 +94,10 @@
 	.contact {
 		margin: 5rem 0 0 clamp(1rem, 10vw, 10rem);
 		color: $primary;
+
+		@include for-size(phone) {
+			margin: 3rem $spacing-sm 0;
+		}
 	}
 
 	.grid {
@@ -102,15 +106,33 @@
 		grid-template-columns: 1fr 9fr;
 
 		gap: 5rem 2.5rem; // row gap, col gap
+
+		@include for-size(phone) {
+			// Image et texte compresses cote a cote sur une colonne etroite
+			// etaient trop tasses : on passe en flow simple, chaque bloc
+			// (image, texte, contacts) prend sa propre ligne pleine largeur.
+			display: flex;
+			flex-direction: column;
+			gap: 1.5rem;
+		}
 	}
 
 	.header-text {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;
-		height: 10rem;
+		// min-height (pas height) : sert de plancher a 1440px, mais laisse
+		// la boite grandir si le paragraphe wrap sur plus de lignes a une
+		// largeur de colonne plus etroite (tablette). Avec un height fixe,
+		// le texte en trop debordait de sa boite sans agrandir la ligne de
+		// grille, et le gap ne voyait donc jamais ce debordement.
+		min-height: 10rem;
 
 		@include for-size(phone) {
+			min-height: auto;
+			justify-content: center;
+			gap: $spacing-xs;
+
 			h1 {
 				font-size: 2rem;
 			}
@@ -154,6 +176,12 @@
 				display: flex;
 				align-items: center;
 				gap: $spacing-xs;
+
+				.link-text {
+					min-width: 0;
+					word-break: break-word;
+				}
+
 				a {
 					color: $primary;
 					text-decoration: underline;

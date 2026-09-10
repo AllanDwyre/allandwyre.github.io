@@ -1,7 +1,7 @@
 // Miroir des breakpoints de src/styles/_variables.scss ($breakpoint-sm/-md).
 // A garder synchronise si ces valeurs SCSS changent.
 const PHONE_MAX_WIDTH = 639;
-const TABLET_MAX_WIDTH = 767;
+const TABLET_MAX_WIDTH = 899;
 
 export type DeviceMode = 'phone' | 'tablet' | 'desktop';
 
