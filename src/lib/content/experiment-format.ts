@@ -4,20 +4,13 @@ import Github from '$lib/icons/github.svg?component';
 import { getAllExperimentMetas } from './experiments';
 import type { ExperimentMeta } from './types';
 
-const CATEGORY_COLORS = [
-	'var(--color-red)',
-	'var(--color-orange)',
-	'var(--color-light-orange)',
-	'var(--color-yellow)',
-	'var(--color-dark-blue)',
-	'var(--color-light-blue)',
-	'var(--color-blue)'
-];
+export { getCategoryColors, getCategoryColor } from './category-colors';
 
-// Toutes les categories, tous experiments confondus, triees et dedupliquees.
-// C'est la meme liste utilisee pour les filtres (experiments.svelte) et pour
-// deriver le mapping couleur ci-dessous : il faut que l'ordre soit identique
-// partout pour qu'une categorie garde toujours la meme couleur.
+// Categories des experiments uniquement (triees, dedupliquees) : c'est la
+// liste utilisee pour les filtres de experiments.svelte. Le mapping
+// couleur, lui, est partage avec les articles via category-colors.ts pour
+// qu'une meme categorie garde toujours la meme couleur dans les deux
+// sections.
 export function getAllCategories(): string[] {
 	return Array.from(
 		new Set(
@@ -26,19 +19,6 @@ export function getAllCategories(): string[] {
 				.sort((a, b) => a.localeCompare(b))
 		)
 	);
-}
-
-// Mapping cat -> couleur, piochee dans CATEGORY_COLORS (cycle si plus de
-// categories que de couleurs).
-export function getCategoryColorMap(): Map<string, string> {
-	const categories = getAllCategories();
-	return new Map(categories.map((cat, i) => [cat, CATEGORY_COLORS[i % CATEGORY_COLORS.length]]));
-}
-
-// Couleur de chaque categorie donnee, dans le meme ordre.
-export function getCategoryColors(categories: string[]): string[] {
-	const colorMap = getCategoryColorMap();
-	return categories.map((cat) => colorMap.get(cat) ?? CATEGORY_COLORS[0]);
 }
 
 export interface ExperimentLink {

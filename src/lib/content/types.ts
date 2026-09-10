@@ -3,12 +3,12 @@ export interface ExperimentMeta {
 	title: string;
 	autors: string[];
 
-	reading_time : number // in minutes
+	reading_time: number // in minutes
 
-	project_duration : string;
-	started_date : Date;
-	group_type : "Solo" | "Group" | "Teams";
-	
+	project_duration: string;
+	started_date: Date;
+	group_type: "Solo" | "Group" | "Teams";
+
 
 	categories: string[];
 	tech_stack: string[];
@@ -20,4 +20,18 @@ export interface ExperimentMeta {
 
 	github_link: string;
 	demo_link: string;
+}
+
+
+export interface ArticleMeta {
+	slug: string;
+	title: string;
+	autors: string[];
+
+	reading_time: number // in minutes
+	category: string;
+	favorite: boolean;
+
+	creation_date: Date;
+	link: string;
 }
