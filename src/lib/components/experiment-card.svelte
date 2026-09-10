@@ -13,7 +13,11 @@
 	const circle_style = corners[Math.floor(Math.random() * corners.length)];
 </script>
 
-<a href="/experiments/{meta.slug}" class="card" style="background:{meta.colors[0]}; {style}">
+<a
+	href="/experiments/{meta.slug}"
+	class="card"
+	style="background:{meta.colors[0]}; view-transition-name: experiment-{meta.slug}; {style}"
+>
 	<span class="circle" style={circle_style}></span>
 	<span class="categories">{meta.categories.join(' · ')}</span>
 	<span class="title">

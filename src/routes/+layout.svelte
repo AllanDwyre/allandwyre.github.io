@@ -9,24 +9,10 @@
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
 
-		// simple scroll d'ancre sur la même route (ex: /#experiments) : pas besoin
-		// d'une view transition, on laisse le scroll natif faire son travail
-		if (navigation.from?.url.pathname === navigation.to?.url.pathname) return;
-
 		return new Promise((resolve) => {
-			const html = document.documentElement;
-			// bloque le scroll pendant la transition : l'overlay de la view
-			// transition est pinné au viewport (pas au scroll du document), donc
-			// scroller pendant qu'elle joue désynchronise l'image de la vraie page
-			html.style.overflow = 'hidden';
-
-			const transition = document.startViewTransition(async () => {
+			document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
-			});
-
-			transition.finished.finally(() => {
-				html.style.overflow = '';
 			});
 		});
 	});
@@ -47,3 +33,49 @@
 </svelte:head>
 
 {@render children()}
+
+<style lang="scss">
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+	}
+
+	@keyframes fade-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	@keyframes slide-from-right {
+		from {
+			transform: translateX(30px);
+		}
+	}
+
+	@keyframes slide-to-left {
+		to {
+			transform: translateX(-30px);
+		}
+	}
+
+	:root::view-transition-old(root) {
+		animation:
+			90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+	}
+
+	:root::view-transition-new(root) {
+		animation:
+			210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+			300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+	}
+
+	@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
+</style>

@@ -21,6 +21,7 @@
 		font-size: 1rem;
 		color: $text;
 
+		max-width: 100%;
 		margin-bottom: 1rem;
 	}
 
@@ -32,6 +33,10 @@
 		border-radius: 0.2rem;
 
 		transition: background-color 0.3s ease;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-wrap: nowrap;
+		min-width: 0;
 
 		&:hover {
 			background-color: rgba($color-light-blue, 0.1);
@@ -42,6 +47,7 @@
 		cursor: pointer;
 		padding: 0.15rem 0.4rem;
 		border-radius: 0.2rem;
+		flex-shrink: 0;
 
 		&:hover {
 			background-color: rgba(#fff, 0.25);

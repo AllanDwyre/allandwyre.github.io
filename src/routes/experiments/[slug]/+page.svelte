@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import { page } from '$app/state';
-	import { getAllExperimentMetas, getExperimentContent } from '$lib/content/experiments';
 	import {
 		getExperimentLinks,
 		getExperimentInfos,
@@ -14,10 +13,13 @@
 	import Footer from '$lib/components/footer.svelte';
 	import Button from '$lib/components/button.svelte';
 	import Divider from '$lib/components/divider.svelte';
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 
 	let slug = $derived(page.params.slug ?? '');
-	let meta = $derived(getAllExperimentMetas().find((m) => m.slug === slug));
-	let contentPromise = $derived(getExperimentContent(slug));
+	let meta = $derived(data.meta);
+	let Content = $derived(data.mod?.default);
 
 	let infos = $derived(meta ? getExperimentInfos(meta) : []);
 	let links = $derived(meta ? getExperimentLinks(meta) : []);
@@ -43,14 +45,15 @@
 		activeId = current;
 	}
 
-	// Recalcule les headings a chaque changement de contenu (nouveau slug),
-	// une fois le <Content/> effectivement monte dans le DOM (tick()).
+	// Recalcule les headings a chaque changement de contenu (nouveau slug).
+	// Le contenu est deja resolu par +page.ts avant que SvelteKit ne bascule
+	// le DOM (voir le load()), donc plus besoin d'attendre une promesse ici :
+	// juste un tick() pour laisser <Content/> se monter avant de lire le DOM.
 	$effect(() => {
-		const promise = contentPromise;
+		const currentContent = Content;
 		let cancelled = false;
 
-		promise.then(async () => {
-			await tick();
+		tick().then(() => {
 			if (!cancelled) {
 				headings = extractHeadingAnchors('.md-content');
 				updateActiveHeading();
@@ -71,7 +74,7 @@
 	<title>{meta ? `${meta.title} — Allan Golding Dwyre` : 'Experiment'}</title>
 </svelte:head>
 
-<nav id="vertical-nav">
+<nav id="vertical-nav" class="no-phone">
 	{#each headings as heading}
 		<a href="#{heading.id}" class="nav-item" class:active={activeId === heading.id}>
 			<span class="bar"></span>
@@ -89,7 +92,8 @@
 		]}
 	/>
 
-	<header style="background-color: {category_colors[0]};">
+	<header style="background-color: {category_colors[0]}; ">
+		<!--  view-transition-name: experiment-{slug}; -->
 		<div class="circle"></div>
 
 		<div class="categories">
@@ -126,14 +130,11 @@
 
 	{#if meta}
 		<article class="md-content">
-			{#await contentPromise then mod}
-				{#if mod}
-					{@const Content = mod.default}
-					<Content />
-				{:else}
-					<p>Contenu introuvable.</p>
-				{/if}
-			{/await}
+			{#if Content}
+				<Content />
+			{:else}
+				<p>Contenu introuvable.</p>
+			{/if}
 		</article>
 	{:else}
 		<p>Cet experiment n'existe pas.</p>
@@ -349,6 +350,8 @@
 
 			text-decoration: none;
 
+			transition: all 150ms ease-in;
+
 			p {
 				font-weight: 600;
 			}
@@ -356,6 +359,10 @@
 			&.right {
 				align-items: flex-end;
 				text-align: right;
+			}
+
+			&:hover {
+				transform: scale(1.05);
 			}
 		}
 	}
