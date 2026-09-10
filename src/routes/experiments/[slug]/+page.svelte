@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import { page } from '$app/state';
 	import { getAllExperimentMetas, getExperimentContent } from '$lib/content/experiments';
 	import {
@@ -8,6 +9,7 @@
 		getCategoryColors,
 		getAdjacentExperiments
 	} from '$lib/content/experiment-format';
+	import { extractHeadingAnchors, type Heading } from '$lib/utils/headings';
 	import Breadcrumbs from '$lib/components/breadcrumbs.svelte';
 	import Footer from '$lib/components/footer.svelte';
 	import Button from '$lib/components/button.svelte';
@@ -24,13 +26,59 @@
 	// pour que "Deployment" ait toujours la meme couleur partout.
 	let category_colors = $derived(meta ? getCategoryColors(meta.categories) : []);
 	let adjacent = $derived(getAdjacentExperiments(slug));
+
+	let headings = $state<Heading[]>([]);
+	let activeId = $state<string | null>(null);
+
+	function updateActiveHeading() {
+		const threshold = 300; // px depuis le haut du viewport
+
+		let current: string | null = null;
+		for (const heading of headings) {
+			const el = document.getElementById(heading.id);
+			if (el && el.getBoundingClientRect().top <= threshold) {
+				current = heading.id;
+			}
+		}
+		activeId = current;
+	}
+
+	// Recalcule les headings a chaque changement de contenu (nouveau slug),
+	// une fois le <Content/> effectivement monte dans le DOM (tick()).
+	$effect(() => {
+		const promise = contentPromise;
+		let cancelled = false;
+
+		promise.then(async () => {
+			await tick();
+			if (!cancelled) {
+				headings = extractHeadingAnchors('.md-content');
+				updateActiveHeading();
+			}
+		});
+
+		window.addEventListener('scroll', updateActiveHeading, { passive: true });
+
+		return () => {
+			cancelled = true;
+			headings = [];
+			window.removeEventListener('scroll', updateActiveHeading);
+		};
+	});
 </script>
 
 <svelte:head>
 	<title>{meta ? `${meta.title} — Allan Golding Dwyre` : 'Experiment'}</title>
 </svelte:head>
 
-<div id="vertical-nav"></div>
+<nav id="vertical-nav">
+	{#each headings as heading}
+		<a href="#{heading.id}" class="nav-item" class:active={activeId === heading.id}>
+			<span class="bar"></span>
+			<span class="label">{heading.text}</span>
+		</a>
+	{/each}
+</nav>
 
 <main>
 	<Breadcrumbs
@@ -127,8 +175,64 @@
 
 		display: flex;
 		flex-direction: column;
-
 		align-items: flex-end;
+		user-select: none;
+
+		.nav-item {
+			position: relative;
+			display: flex;
+			align-items: center;
+			text-decoration: none;
+
+			padding-block: $spacing-xxs;
+			padding-left: $spacing-lg;
+			transition: padding-block 250ms ease;
+
+			.bar {
+				width: 28px;
+				height: 2px;
+				background-color: rgba($secondary, 0.35);
+				transition:
+					background-color 250ms ease,
+					width 250ms ease;
+			}
+
+			.label {
+				position: absolute;
+				right: calc(100% + #{$spacing-xs});
+
+				font-size: $font-size-sm;
+				color: $primary;
+				white-space: nowrap;
+
+				opacity: 0;
+				transform: translateX(4px);
+				pointer-events: none;
+				transition:
+					opacity 200ms ease,
+					transform 200ms ease;
+			}
+
+			&:hover {
+				.bar {
+					background-color: $primary;
+					width: 36px;
+				}
+				.label {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			&.active .bar {
+				background-color: $primary;
+				width: 36px;
+			}
+		}
+
+		&:hover .nav-item {
+			padding-block: $spacing-xs;
+		}
 	}
 
 	main {

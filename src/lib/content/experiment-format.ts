@@ -1,5 +1,5 @@
 import type { Component } from 'svelte';
-import { Calendar, Clock, User, Users, UsersRound, ArrowUpRight } from '@lucide/svelte';
+import { CalendarDays, Timer, User, Users, UsersRound, ArrowUpRight } from '@lucide/svelte';
 import Github from '$lib/icons/github.svg?component';
 import { getAllExperimentMetas } from './experiments';
 import type { ExperimentMeta } from './types';
@@ -81,10 +81,10 @@ const GROUP_TYPE_ICONS: Record<ExperimentMeta['group_type'], Component> = {
 // pretes a afficher, dans cet ordre.
 export function getExperimentInfos(meta: ExperimentMeta): ExperimentInfo[] {
 	return [
-		{ icon: Clock, label: meta.project_duration },
+		{ icon: Timer, label: meta.project_duration },
 		{ icon: GROUP_TYPE_ICONS[meta.group_type], label: meta.group_type + " project" },
 		{
-			icon: Calendar,
+			icon: CalendarDays,
 			label: meta.started_date.toLocaleDateString(undefined, { year: 'numeric', month: 'long' })
 		},
 	];

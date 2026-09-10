@@ -23,7 +23,11 @@
 		color: $color-red;
 
 		letter-spacing: 0.09em;
-		margin: 0;
+		margin: $spacing-lg 0 0 0;
+
+		// Ancre du vertical-nav : evite qu'un h1 atterrisse sous la main-nav
+		// fixe (scroll-behavior: smooth est deja global sur html).
+		scroll-margin-top: calc(#{$main-nav-height} + #{$spacing-md});
 	}
 
 	:global(h2) {
