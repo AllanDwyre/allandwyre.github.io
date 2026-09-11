@@ -10,7 +10,11 @@
 
 	const metas = getAllExperimentMetas();
 
-	const categories = getAllCategories();
+	// N'affiche que les categories utilisees par au moins un experiment -
+	// pas de filtre pour une categorie vide.
+	const categories = getAllCategories().filter((cat) =>
+		metas.some((m) => m.categories.includes(cat))
+	);
 	let filters: ('All' | Category)[] = ['All', ...categories];
 
 	const metas_with_colors = metas.map((m) => ({
