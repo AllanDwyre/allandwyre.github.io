@@ -1,0 +1,33 @@
+> This article covers my 2026 internship mission at VIDAL. Code and internal architecture stay confidential; this describes how I approached the problem.
+
+# Introduction
+
+## Context
+
+VIDAL publishes validated medical reference content (recommendations, molecules, monographies) used by doctors. My mission was to design, solo, an AI assistant that helps doctors during a consultation by surfacing relevant clinical information automatically instead of requiring manual lookup.
+
+## The problem
+
+A doctor's patient record (structured as **FHIR**) contains a lot of clinical history, but connecting that history to the right validated recommendation — an urgent contraindication, a routine exam that's due, a prevention measure — takes time during a consultation. Doing that lookup, correctly and quickly, for every patient doesn't scale manually.
+
+# My Solution
+
+## Reading the patient record
+
+The assistant parses **FHIR** patient records to extract the clinical information that matters for the task at hand (conditions, treatments, history), rather than dumping the whole record at a language model.
+
+## Multi-agent orchestration
+
+Instead of one large prompt trying to do everything, the system is split into a **multi-agent** architecture: independent agents handle different sub-tasks (contraindication checks, exam reminders, prevention) in parallel and their outputs are merged into a single set of suggestions, which keeps each agent's task simple and its output easier to trust.
+
+## Reasoning loop and retrieval
+
+Each agent runs a **ReAct loop** (reason, act, observe) so its decision process stays traceable instead of being a black box, and can call out to a **RAG** pipeline over a **Qdrant** vector index of VIDAL's validated content, plus web search when needed, to ground its suggestions in actual recommendations rather than model guesses.
+
+## Tooling
+
+The agents talk to external tools and context through **MCP (Model Context Protocol)**, built with **LangChain**, **LangGraph** and **Pydantic AI** for the orchestration and typed agent I/O.
+
+# Conclusion
+
+The result automates a chunk of the clinical lookup a doctor would otherwise do by hand mid-consultation: contraindications, due exams and prevention suggestions grounded in validated recommendations, with a traceable reasoning trail behind each one. It was also a good stress test of multi-agent design for a domain — medical — where a wrong or unexplained suggestion isn't acceptable.

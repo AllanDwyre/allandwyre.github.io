@@ -1,0 +1,29 @@
+> This article covers another 2026 internship mission at VIDAL. Code and internal architecture stay confidential; this describes how I approached the problem.
+
+# Introduction
+
+## Context
+
+Alongside the clinical assistant, VIDAL also wanted a simple **question-answering chatbot** for doctors, built on the same kind of validated content: therapeutic recommendations, molecules and monographies.
+
+## The problem
+
+Doctors already know how to search VIDAL's reference content, but free-text questions ("what's the max daily dose for X with renal insufficiency") don't map cleanly to a keyword search across recommendations, molecules and monographies stored as separate, structured content types.
+
+# My Solution
+
+## Indexing the knowledge base
+
+I indexed VIDAL's recommendations, molecules and monographies into a **Qdrant** vector database, so a doctor's question can be matched against the actual meaning of the content instead of exact keywords.
+
+## Retrieval-augmented answers
+
+The chatbot runs a standard **RAG** pipeline: the question is embedded, the closest passages are retrieved from Qdrant across the different content types, and a language model composes an answer grounded strictly in that retrieved content, orchestrated with **LangChain**.
+
+## Keeping answers trustworthy
+
+Because this is medical content read by doctors, answers stay tied to the source passages rather than being open-ended generation, which keeps the chatbot closer to "a faster way to search validated content" than "an opinionated medical assistant".
+
+# Conclusion
+
+The chatbot gives doctors a single, natural-language entry point across recommendations, molecules and monographies instead of three separate lookups, while staying grounded in VIDAL's validated content. It was a good complement to the clinical assistant mission: same retrieval building blocks, but optimized for direct Q&A rather than proactive suggestions.
