@@ -27,6 +27,11 @@
 	@use '../../styles/variables' as *;
 	@use '../../styles/mixins' as *;
 
+	.article {
+		// min-height: calc(100dvh - $main-nav-height - 1rem);
+		min-height: calc(70dvh - $main-nav-height - 1rem);
+	}
+
 	.article-header {
 		display: flex;
 		justify-content: space-between;
