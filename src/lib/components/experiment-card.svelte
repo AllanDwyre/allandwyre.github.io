@@ -19,11 +19,11 @@
 	style="background:{meta.colors[0]}; view-transition-name: experiment-{meta.slug}; {style}"
 >
 	<span class="circle" style={circle_style}></span>
+	{#if meta.favorite}
+		<span class="favorite-badge">★ Favorite</span>
+	{/if}
 	<span class="categories">{meta.categories.join(' · ')}</span>
-	<span class="title">
-		{meta.title}
-		{#if meta.favorite}★{/if}
-	</span>
+	<span class="title">{meta.title}</span>
 </a>
 
 <style lang="scss">
@@ -63,6 +63,17 @@
 
 			line-height: 1.25;
 			letter-spacing: 0.02em;
+		}
+
+		.favorite-badge {
+			background-color: rgba(#fff, 0.15);
+			padding: $spacing-xxs $spacing-xs;
+			border-radius: 20px;
+
+			font-size: $font-size-sm;
+			font-weight: 700; // bold
+
+			margin-bottom: $spacing-xxs;
 		}
 
 		.categories {
