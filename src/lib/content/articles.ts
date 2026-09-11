@@ -14,7 +14,10 @@ const contentModules = import.meta.glob('./articles/*/content.svx');
 export function getAllArticleMetas(): ArticleMeta[] {
 	return Object.values(metaModules)
 		.map((mod) => mod.meta)
-		.sort((a, b) => b.creation_date.getTime() - a.creation_date.getTime());
+		.sort(
+			(a, b) =>
+				Number(b.favorite) - Number(a.favorite) || b.creation_date.getTime() - a.creation_date.getTime()
+		);
 }
 
 export async function getArticleContent(slug: string) {

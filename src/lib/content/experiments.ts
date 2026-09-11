@@ -14,7 +14,7 @@ const contentModules = import.meta.glob('./experiments/*/content.svx');
 export function getAllExperimentMetas(): ExperimentMeta[] {
 	return Object.values(metaModules)
 		.map((mod) => mod.meta)
-		.sort((a, b) => a.title.localeCompare(b.title));
+		.sort((a, b) => Number(b.favorite) - Number(a.favorite) || a.title.localeCompare(b.title));
 }
 
 export async function getExperimentContent(slug: string) {
