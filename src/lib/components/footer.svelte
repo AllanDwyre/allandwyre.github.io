@@ -45,30 +45,62 @@
 		margin-top: 15rem;
 	}
 
+	// Bandes au repos : aplaties depuis la gauche, pas encore peintes.
+	// Au lieu de tomber/rebondir, elles se "peignent" horizontalement,
+	// comme un coup de pinceau confiant - plus sobre et plus proche de
+	// l'identite "swatch de couleurs" du bloc que du jouet elastique.
+	// Le decalage entre bandes cree un balayage en diagonale plutot qu'un
+	// aplat qui apparait d'un bloc.
 	.band {
 		width: 100%;
 		height: 1.1rem;
-		transform: translateY(100%);
+		transform-origin: left center;
+		transform: scaleX(0);
 		opacity: 0;
-		transition:
-			transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-			opacity 0.5s ease-out;
 
 		&:nth-child(1) {
 			background-color: $color-yellow;
-			transition-delay: 0.18s;
 		}
 		&:nth-child(2) {
 			background-color: $color-light-orange;
-			transition-delay: 0.12s;
 		}
 		&:nth-child(3) {
 			background-color: $color-orange;
-			transition-delay: 0.06s;
 		}
 		&:nth-child(4) {
 			background-color: $color-red;
-			transition-delay: 0s;
+		}
+	}
+
+	// Sortie de vue : reset rapide et sans decalage. Si l'entree partageait
+	// le meme stagger (jusqu'a 0.24s), un aller-retour scroll up/down rapide
+	// n'avait pas le temps de repasser par un etat propre avant de rejouer
+	// l'entree - l'anim semblait "coincee" a mi-chemin.
+	footer:not(.in-view) .band {
+		transition:
+			transform 0.2s ease-in,
+			opacity 0.15s ease-in;
+	}
+
+	// Entree : le balayage soigne, avec son decalage diagonal.
+	footer.in-view .band {
+		transform: scaleX(1);
+		opacity: 1;
+		transition:
+			transform 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+			opacity 0.3s ease-out;
+
+		&:nth-child(1) {
+			transition-delay: 0.24s, 0.24s;
+		}
+		&:nth-child(2) {
+			transition-delay: 0.16s, 0.16s;
+		}
+		&:nth-child(3) {
+			transition-delay: 0.08s, 0.08s;
+		}
+		&:nth-child(4) {
+			transition-delay: 0s, 0s;
 		}
 	}
 
@@ -89,11 +121,6 @@
 		transition:
 			opacity 0.5s ease-out 0.28s,
 			transform 0.5s ease-out 0.28s;
-	}
-
-	footer.in-view .band {
-		transform: translateY(0);
-		opacity: 1;
 	}
 
 	footer.in-view .info {
