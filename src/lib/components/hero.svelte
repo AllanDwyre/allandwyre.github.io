@@ -70,7 +70,9 @@
 		Passionate about building <span>AI models</span> and deploying them.
 	</h1>
 	<div class="profil">
-		<img src="/profil.png" alt="Allan Golding Dwyre profile" class="header-image" />
+		<a href="/contact" class="header-image-link" aria-label="Go to contact page">
+			<img src="/profil.png" alt="Allan Golding Dwyre profile" class="header-image" />
+		</a>
 		<div class="fade-in-item">
 			<CompactContact />
 		</div>
@@ -151,13 +153,24 @@
 		animation: fade-in 0.6s ease-out both;
 	}
 
+	.header-image-link {
+		display: block;
+		border-radius: 50%;
+		flex-shrink: 0;
+		transition: transform 250ms ease-out;
+
+		&:hover {
+			transform: scale(1.04);
+		}
+	}
+
 	.header-image {
 		aspect-ratio: 1 / 1;
 		height: clamp(10rem, 20vw, 13.875rem);
 		width: clamp(10rem, 20vw, 13.875rem);
 		object-fit: cover;
 		border-radius: 50%;
-		flex-shrink: 0;
+		display: block;
 
 		view-transition-name: profil-photo;
 	}
