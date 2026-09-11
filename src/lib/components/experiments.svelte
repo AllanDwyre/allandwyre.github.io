@@ -3,6 +3,7 @@
 	import { getAllCategories, getCategoryColors } from '$lib/content/experiment-format';
 	import { render } from '$lib/utils/create_layout';
 	import { createDeviceMode } from '$lib/utils/viewport.svelte';
+	import type { Category } from '$lib/content/types';
 	import ExperimentCard from './experiment-card.svelte';
 
 	const device = createDeviceMode();
@@ -10,20 +11,21 @@
 	const metas = getAllExperimentMetas();
 
 	const categories = getAllCategories();
-	let filters = ['All'].concat(categories);
+	let filters: ('All' | Category)[] = ['All', ...categories];
 
 	const metas_with_colors = metas.map((m) => ({
 		...m,
 		colors: getCategoryColors(m.categories)
 	}));
 
-	let active_filter = $state('All');
+	let active_filter = $state<'All' | Category>('All');
 
-	let filtered = $derived(
-		active_filter === 'All'
+	let filtered = $derived.by(() => {
+		const filter = active_filter;
+		return filter === 'All'
 			? metas_with_colors
-			: metas_with_colors.filter((m) => m.categories.includes(active_filter))
-	);
+			: metas_with_colors.filter((m) => m.categories.includes(filter));
+	});
 	// Le layout "grille asymetrique" de create_layout n'a de sens qu'avec 4
 	// colonnes (desktop). Sur phone/tablet la grille CSS retombe deja sur
 	// 1 ou 2 colonnes uniformes : pas besoin (et pas correct) d'y appliquer

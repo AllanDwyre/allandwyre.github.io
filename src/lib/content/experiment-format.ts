@@ -5,23 +5,8 @@ import { getAllExperimentMetas } from './experiments';
 import { getAdjacent } from './content-format';
 import type { ExperimentMeta } from './types';
 
-export { getCategoryColors, getCategoryColor } from './category-colors';
+export { getCategoryColors, getCategoryColor, getAllCategories } from './category-colors';
 export { formatAutors } from './content-format';
-
-// Categories des experiments uniquement (triees, dedupliquees) : c'est la
-// liste utilisee pour les filtres de experiments.svelte. Le mapping
-// couleur, lui, est partage avec les articles via category-colors.ts pour
-// qu'une meme categorie garde toujours la meme couleur dans les deux
-// sections.
-export function getAllCategories(): string[] {
-	return Array.from(
-		new Set(
-			getAllExperimentMetas()
-				.flatMap((m) => m.categories)
-				.sort((a, b) => a.localeCompare(b))
-		)
-	);
-}
 
 export interface ExperimentLink {
 	icon: Component;

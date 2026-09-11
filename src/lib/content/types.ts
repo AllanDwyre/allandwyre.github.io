@@ -1,3 +1,11 @@
+// Seules categories valides, partagees entre experiments et articles.
+// `as const` + `typeof` donne un type litteral : impossible d'assigner une
+// categorie hors de cette liste (fini les fautes de frappe genre
+// "Deployement" ou "Model" qui creaient une categorie fantome).
+export const CATEGORIES = ['Data', 'Deployment', 'Impact Study', 'Models', 'Monitoring'] as const;
+
+export type Category = (typeof CATEGORIES)[number];
+
 export interface ExperimentMeta {
 	slug: string;
 	title: string;
@@ -10,7 +18,7 @@ export interface ExperimentMeta {
 	group_type: "Solo" | "Group" | "Teams";
 
 
-	categories: string[];
+	categories: Category[];
 	tech_stack: string[];
 
 	favorite: boolean;
@@ -29,7 +37,7 @@ export interface ArticleMeta {
 	autors: string[];
 
 	reading_time: number // in minutes
-	category: string;
+	category: Category;
 	favorite: boolean;
 
 	creation_date: Date;
