@@ -1,0 +1,29 @@
+> University project on classical machine learning for structured, multi-class data.
+
+# Introduction
+
+## Context
+
+Before reaching for deep learning, classical ML models are often faster to train, easier to interpret and perfectly sufficient on structured, tabular data. This project was about comparing several of them head to head on the same multi-class classification problem.
+
+## The problem
+
+Different algorithms make very different trade-offs between accuracy, interpretability and training cost. The goal was to quantify those trade-offs on a real dataset rather than assume one algorithm is "the best" by default.
+
+# My Solution
+
+## Comparing algorithms
+
+I trained and evaluated four classical algorithms on the same train/test split: Decision Trees, Random Forest, K-Nearest Neighbors and SVM. Each model was scored on accuracy, precision/recall per class, and training time, to get a full picture rather than a single number.
+
+## Hyperparameter tuning
+
+For each algorithm, I ran a `GridSearchCV` over its key hyperparameters (tree depth, number of estimators, number of neighbors, kernel/C for SVM) with cross-validation, to make sure the comparison used each model at its best rather than default settings.
+
+## Visualizing the results
+
+I used Matplotlib/Seaborn to plot confusion matrices and accuracy comparisons across models, which made it much easier to see where each algorithm struggled — typically on the classes with fewer examples or more overlap with their neighbors.
+
+# Conclusion
+
+Random Forest ended up giving the best overall balance of accuracy and robustness, while Decision Trees stayed the most interpretable option and KNN the simplest baseline. The exercise was less about finding a winner and more about building a repeatable methodology (grid search + cross-validation + confusion matrix analysis) I still use to pick a model on structured data.
