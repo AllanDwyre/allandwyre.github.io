@@ -18,6 +18,6 @@ export const meta = {
 	excerpt:
 		'After a CNN and a smallBERT classifier both hit a wall, we built a CLIP model from scratch to search images by caption and captions by image on a 4-class dataset.',
 
-	github_link: 'https://github.com/AllanDwyre/CLIP_Image_Texte',
+	github_link: 'https://github.com/AllanDwyre/CLIP_Image_Texte/blob/main/projetClip.ipynb',
 	demo_link: ''
 } satisfies ExperimentMeta;

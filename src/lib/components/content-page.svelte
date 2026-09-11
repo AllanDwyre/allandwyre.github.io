@@ -173,6 +173,8 @@
 		user-select: none;
 
 		.nav-item {
+			user-select: none;
+
 			position: relative;
 			display: flex;
 			align-items: center;
